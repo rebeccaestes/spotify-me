@@ -28,26 +28,22 @@ $("#search").on("submit", function(e){
     type: "get",
     dataType: "json"
   }).done(function(response){
-    // debugger;
     console.log("Ajax request success!");
     console.log(response);
-    // console.log(response.tracks[1].name);
-    // console.log(response.artists[0].name);
+
     $("#results").empty();
 
     if (response.artists) {
       for (var i = 0; i < response.artists.length; i++) {
         $("#results").append("<li><a href=" + response.artists[i].href + ">" + response.artists[i].name + "</a></li>");
       }
-      // console.log(response)
     }
 
     else {
       for (var i = 0; i < response.tracks.length; i++) {
-        console.log(response.tracks.length)
         var trackToCheck = response.tracks[i].name;
         if (trackToCheck.toLowerCase().indexOf(keyword) != -1) {
-          $("#results").append("<li>" + trackToCheck + "</li>");
+          $("#results").append("<li><a href=" + response.tracks[i].href + ">" + trackToCheck + "</a></li>");
         }
       }
 
